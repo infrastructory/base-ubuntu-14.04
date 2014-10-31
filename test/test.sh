@@ -13,4 +13,19 @@ function fail()
 }
 
 echo "Checking container"
-ok
+
+echo "  --> Berkshelf Installation"
+berkshelf=`/opt/chef/embedded/bin/berks --version`
+if [[ $berkshelf =~ "3.2.0" ]]; then
+	ok
+else
+	fail
+fi
+
+echo "  --> Chef Installation"
+chef=`/usr/bin/env chef-client --version`
+if [[ $chef =~ "11.16.4" ]]; then
+	ok
+else
+	fail
+fi
